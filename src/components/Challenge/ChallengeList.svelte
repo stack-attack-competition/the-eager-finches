@@ -14,7 +14,7 @@
     }
 
     $: {
-        filteredChallenges = _.orderBy(challenges, 'isActive', 'desc');
+        filteredChallenges = _.orderBy(challenges, a => new Date(a.endDate).getTime(), 'desc');
         calculateBets();
     }
 
@@ -70,7 +70,7 @@
     {#each filteredChallenges as challenge, i (challenge.id)}
         <tr>
             <td><img src={mappedAuthors[i] && mappedAuthors[i].pictureUrl} alt="avatar" /></td>
-            <td class="long-text-ellipsis">{challenge.title}</td>
+            <td class="long-text-ellipsis"><a href="/challenges/{challenge.id}">{challenge.title}</a></td>
             <td class="long-text-ellipsis">{challenge.description}</td>
             <td>${groupedBets[challenge.id] && groupedBets[challenge.id].total}</td>
             <td>${groupedBets[challenge.id] && groupedBets[challenge.id].like}</td>

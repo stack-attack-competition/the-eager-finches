@@ -7,7 +7,7 @@
 <style lang="scss">
 
 	.mdl-layout__content {
-		/*max-width: 1000px;*/
+		max-width: 1000px;
 		left: 0;
 		right: 0;
 		margin: auto;

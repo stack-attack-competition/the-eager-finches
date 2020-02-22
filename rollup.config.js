@@ -30,7 +30,8 @@ export default {
 			replace({
 				'process.browser': true,
 				'process.env.NODE_ENV': JSON.stringify(mode),
-				'process.env.BACKEND_URL': `"${process.env.BACKEND_URL}"`
+				'process.env.BACKEND_URL': `"${process.env.BACKEND_URL}"`,
+				'process.env.BACKEND_URL_MOCKED': `"${process.env.BACKEND_URL_MOCKED}"`
 			}),
 			svelte({
 				dev,
@@ -71,7 +72,8 @@ export default {
 			replace({
 				'process.browser': false,
 				'process.env.NODE_ENV': JSON.stringify(mode),
-				'process.env.BACKEND_URL': `"${process.env.BACKEND_URL}"`
+				'process.env.BACKEND_URL': `"${process.env.BACKEND_URL}"`,
+				'process.env.BACKEND_URL_MOCKED': `"${process.env.BACKEND_URL_MOCKED}"`
 			}),
 			svelte({
 				generate: 'ssr',

@@ -1,9 +1,9 @@
 <script context="module">
     export async function preload(page) {
         const apiCalls = [
-            this.fetch(process.env.BACKEND_URL + '/mock/users'),
-            this.fetch(process.env.BACKEND_URL + '/mock/challenges'),
-            this.fetch(process.env.BACKEND_URL + '/mock/bets')
+            this.fetch(process.env.BACKEND_URL_MOCKED + '/users'),
+            this.fetch(process.env.BACKEND_URL_MOCKED + '/challenges'),
+            this.fetch(process.env.BACKEND_URL_MOCKED + '/bets')
         ];
         const [userResponse, challengesResponse, betsResponse] = await Promise.all(apiCalls);
 
