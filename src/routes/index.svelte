@@ -1,3 +1,7 @@
+<script>
+	const backend = "process.env.BACKEND_URL";
+</script>
+
 <style>
 	h1, figure, p {
 		text-align: center;
@@ -44,3 +48,5 @@
 </figure>
 
 <p><strong>Try editing this file (src/routes/index.svelte) to test live reloading.</strong></p>
+
+<pre>{ backend }</pre>
