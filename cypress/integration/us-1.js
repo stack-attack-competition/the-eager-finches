@@ -1,15 +1,15 @@
 // Érdeklődő személyként, regisztrálni szeretnék az oldalra.
 
+const baseUrl = Cypress.config().baseUrl;
+
 describe('US-1: Regisztráció - Navigáció', () => {
-    beforeEach(() => {
-        cy.visit('/')
-    });
+    it('', () => {
+        cy.visit(baseUrl);
 
-    // visible nav button
+        // reg button
+        cy.get('#registerNavButton').click();
 
-    // reg button jumps to /auth/reg page
-    it('Find and click register button', () => {
-        cy.get('nav a').contains('blog').click();
-        cy.url().should('include', '/blog');
+        // redirect
+        cy.url().should('eq', baseUrl + 'auth/registration');
     });
 });

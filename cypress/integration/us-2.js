@@ -9,18 +9,29 @@ const userData = {
     "pictureUrl": "http://www.gravatar.com/avatar/c02f9e12fd44c17c0ce3b4255aa27b14"
 };
 
+const baseUrl = Cypress.config().baseUrl;
+
 describe('US-2: Regisztráció - From', () => {
-    beforeEach(() => {
-        cy.visit('/auth/registration')
-    });
+    it('', () => {
+        cy.visit(baseUrl);
 
-    // reg form validation
+        // reg button
+        cy.get('#registerNavButton').click();
 
-    // duplication reg
+        // redirect
+        cy.url().should('eq', baseUrl + 'auth/registration');
 
-    // reg form submit
-    it('Find and click register button', () => {
-        cy.get('nav a').contains('blog').click();
-        cy.url().should('include', '/blog');
-    });
+        // login form
+        cy.get('#registrationEmailInput').type(userData.email);
+        cy.get('#registrationPasswordInput').type(userData.password);
+        cy.get('#registrationFirstNameInput').type(userData.firstName);
+        cy.get('#registrationLastNameInput').type(userData.lastName);
+        cy.get('#registrationPictureUrlInput').type(userData.pictureUrl);
+
+        // submit
+        cy.get('#registrationSubmitButton').click();
+
+        // redirect
+        cy.url().should('eq', baseUrl)
+    })
 });

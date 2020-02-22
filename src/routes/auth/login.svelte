@@ -23,20 +23,28 @@
             errorList = ['Wrong email or password.'];
         } else {
             isLoggedIn.set(true);
-            const {firstName, lastName } = await response.json();
+            const {firstName, lastName} = await response.json();
             userName.set(firstName + ' ' + lastName);
             goto('/');
         }
     }
+
+    function focus() {
+        const el = this;
+        const parent = el.parentElement;
+        parent.classList.add('is-focused');
+    }
+
+    function blur() {
+        const el = this;
+        const parent = el.parentElement;
+        parent.classList.remove('is-focused');
+    }
 </script>
 
 <style lang="scss">
-    label {
+    .mdl-textfield {
         display: block;
-
-        input {
-            float: right;
-        }
     }
 </style>
 
@@ -46,16 +54,16 @@
 
 <h1>Registration</h1>
 
-<div>
-    <label>
-        Email
-        <input bind:value={email} id="loginEmailInput">
-    </label>
+<form on:submit|preventDefault={submit}>
+    <div class="mdl-textfield mdl-js-textfield {email ? 'is-dirty': null}">
+        <input class="mdl-textfield__input" type="text" id="loginEmailInput" bind:value={email} on:focus={focus} on:blur={blur}>
+        <label class="mdl-textfield__label" for="loginEmailInput">Email</label>
+    </div>
 
-    <label>
-        Password
-        <input type="password" bind:value={password} id="loginPasswordInput">
-    </label>
+    <div class="mdl-textfield mdl-js-textfield {password ? 'is-dirty': null}">
+        <input class="mdl-textfield__input" type="password" id="loginPasswordInput" bind:value={password} on:focus={focus} on:blur={blur}>
+        <label class="mdl-textfield__label" for="loginPasswordInput">Email</label>
+    </div>
 
     {#if errorList.length > 0}
         <div>
@@ -75,4 +83,4 @@
             on:click={submit}>
         Login
     </button>
-</div>
+</form>
