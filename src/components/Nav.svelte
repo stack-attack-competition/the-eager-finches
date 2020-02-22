@@ -94,7 +94,7 @@
         <a class="mdl-navigation__link" href="/me">User Profile</a>
         <a class="mdl-navigation__link" href="/my-challenges">My Challenges</a>
         <a class="mdl-navigation__link" href="/my-bets">My Bets</a>
-        <a class="mdl-navigation__link" href="#" on:click={logout}>Logout</a>
+        <a class="mdl-navigation__link" href="/" on:click|preventDefault={logout}>Logout</a>
         <div class="android-drawer-separator"></div>
     </nav>
 </div>
