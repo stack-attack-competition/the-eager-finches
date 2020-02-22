@@ -30,7 +30,7 @@ export default {
 			replace({
 				'process.browser': true,
 				'process.env.NODE_ENV': JSON.stringify(mode),
-				'process.env.BACKEND_URL': process.env.BACKEND_URL
+				'process.env.BACKEND_URL': `"${process.env.BACKEND_URL}"`
 			}),
 			svelte({
 				dev,
@@ -70,7 +70,8 @@ export default {
 		plugins: [
 			replace({
 				'process.browser': false,
-				'process.env.NODE_ENV': JSON.stringify(mode)
+				'process.env.NODE_ENV': JSON.stringify(mode),
+				'process.env.BACKEND_URL': `"${process.env.BACKEND_URL}"`
 			}),
 			svelte({
 				generate: 'ssr',
