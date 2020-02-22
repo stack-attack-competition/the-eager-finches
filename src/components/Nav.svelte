@@ -13,7 +13,12 @@
 </script>
 
 <style>
-
+	.android-header{
+		background-color: #4a4a55;
+	}
+	.android-logo-image{
+		max-width: 100px;
+	}
 </style>
 
 <div class="android-header mdl-layout__header mdl-layout__header--waterfall">
@@ -23,7 +28,7 @@
     </div>
     <div class="mdl-layout__header-row">
         <span class="android-title mdl-layout-title">
-<!--          <img class="android-logo-image" src="images/android-logo.png" alt="logo">-->
+          <img class="android-logo-image" src="svelte-logo-horizontal.svg" alt="logo">
         </span>
         <!-- Add spacer, to align navigation to the right in desktop -->
         <div class="android-header-spacer mdl-layout-spacer"></div>
@@ -48,7 +53,10 @@
 				Hello, {$userName}
 			</span>
             </div>
-            <button class="android-more-button mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect"
+			<span class="android-mobile-title mdl-layout-title">
+            <img class="android-logo-image" src="svelte-logo-horizontal.svg" alt="logo">
+			</span>
+			<button class="android-more-button mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect"
                     id="more-button">
                 <i class="material-icons">person</i>
             </button>
@@ -74,7 +82,7 @@
 
 <div class="android-drawer mdl-layout__drawer" class:is-visible={isOpen}>
         <span class="mdl-layout-title">
-<!--          <img class="android-logo-image" src="images/android-logo-white.png" alt="logo">-->
+          <img class="android-logo-image" src="svelte-logo-horizontal.svg" alt="logo">
         </span>
     <nav class="mdl-navigation">
         <a class="mdl-navigation__link" href="/my-profile">User Profile</a>
