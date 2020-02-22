@@ -5,22 +5,26 @@ const userData = {
     "password": "kismacska",
 };
 
+const baseUrl = Cypress.config().baseUrl;
+
 describe('US-3: Login', () => {
-    beforeEach(() => {
-        cy.visit('/')
-    });
+    it('', () => {
+         cy.visit(baseUrl);
 
-    // login button
+        // login button
+        cy.get('#loginNavButton').click();
 
-    // redirect
+        // redirect
+        cy.url().should('eq', baseUrl + 'auth/login');
 
-    // login form
+        // login form
+        cy.get('#loginEmailInput').type(userData.email);
+        cy.get('#loginPasswordInput').type(userData.password);
 
-    // submit
+        // submit
+        cy.get('#loginSubmitButton').click();
 
-    // redirect
-    it('Find and click register button', () => {
-        cy.get('nav a').contains('blog').click();
-        cy.url().should('include', '/blog');
+        // redirect
+        cy.url().should('eq', baseUrl)
     });
 });
