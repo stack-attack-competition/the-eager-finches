@@ -60,13 +60,6 @@
 </script>
 
 <style lang="scss">
-    label {
-        display: block;
-
-        input {
-            float: right;
-        }
-    }
     .mdl-textfield{
         display: block;
     }
