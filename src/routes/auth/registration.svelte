@@ -43,6 +43,20 @@
             goto('/');
         }
     }
+
+    function focus() {
+        const el = this;
+        const parent = el.parentElement;
+        console.log(el);
+        parent.classList.add('is-focused');
+    }
+
+    function blur() {
+        const el = this;
+        const parent = el.parentElement;
+        console.log(el);
+        parent.classList.remove('is-focused');
+    }
 </script>
 
 <style lang="scss">
@@ -53,6 +67,9 @@
             float: right;
         }
     }
+    .mdl-textfield{
+        display: block;
+    }
 </style>
 
 <svelte:head>
@@ -61,38 +78,43 @@
 
 <h1>Registration</h1>
 
-<div>
-    <label>
-        Email
-        <input bind:value={email}>
-    </label>
+<form on:submit|preventDefault={submit}>
 
-    <label>
-        Password
-        <input type="password" bind:value={password}>
-    </label>
+    <div class="mdl-textfield mdl-js-textfield {email ? 'is-dirty': null}">
+        <input class="mdl-textfield__input" type="text" id="email" bind:value={email} on:focus={focus} on:blur={blur}>
+        <label class="mdl-textfield__label" for="email">Email</label>
+<!--        <span class="mdl-textfield__error">{error}</span>-->
+    </div>
 
-    <label>
-        First name
-        <input bind:value={firstName}>
-    </label>
+    <div class="mdl-textfield mdl-js-textfield {password ? 'is-dirty': null}">
+        <input class="mdl-textfield__input" type="text" id="password" bind:value={password} on:focus={focus} on:blur={blur}>
+        <label class="mdl-textfield__label" for="password">Password</label>
+    </div>
 
-    <label>
-        Last name
-        <input bind:value={lastName}>
-    </label>
+    <div class="mdl-textfield mdl-js-textfield {firstName ? 'is-dirty': null}">
+        <input class="mdl-textfield__input" type="text" id="firstName" bind:value={firstName} on:focus={focus} on:blur={blur}>
+        <label class="mdl-textfield__label" for="firstName">First name</label>
+    </div>
 
-    <label>
-        Image URL
-        <input bind:value={pictureUrl}>
-    </label>
+    <div class="mdl-textfield mdl-js-textfield {lastName ? 'is-dirty': null}">
+        <input class="mdl-textfield__input" type="text" id="lastName" bind:value={lastName} on:focus={focus} on:blur={blur}>
+        <label class="mdl-textfield__label" for="lastName">Last name</label>
+    </div>
 
+    <div class="mdl-textfield mdl-js-textfield {pictureUrl ? 'is-dirty': null}" class:is-invalid={!validateUrl(pictureUrl)}>
+        <input class="mdl-textfield__input" type="text" id="pictureUrl" bind:value={pictureUrl} on:focus={focus} on:blur={blur}>
+        <label class="mdl-textfield__label" for="pictureUrl">Image URL</label>
+        {#if !validateUrl(pictureUrl)}
+            <span class="mdl-textfield__error">Invalid picture URL</span>
+        {/if}
+    </div>
     {#if validateUrl(pictureUrl)}
-        <div>
+        <div class="m-b-1">
             <!--suppress HtmlUnknownTarget -->
             <img src={pictureUrl} alt="">
         </div>
     {/if}
+
 
     {#if errorList.length > 0}
         <div>
@@ -107,5 +129,5 @@
         </div>
     {/if}
 
-    <button on:click={submit}>Submit</button>
-</div>
+    <button class="mdl-button mdl-button--raised mdl-button--colored" type="submit" on:click={submit}>Submit</button>
+</form>
