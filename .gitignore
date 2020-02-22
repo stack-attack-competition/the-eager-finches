@@ -1,5 +1,5 @@
-/node_modules/
-/public/build/
-
 .DS_Store
-.idea
+node_modules
+yarn-error.log
+/cypress/screenshots/
+/__sapper__/
