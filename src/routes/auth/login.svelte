@@ -1,9 +1,9 @@
 <!--suppress NpmUsedModulesInstalled -->
 <script>
     import {goto} from '@sapper/app';
-    import {isLoggedIn, userName} from '../../store';
+    import {isLoggedIn, userName, email, pictureUrl} from '../../store';
 
-    let email = '';
+    let inputEmail = '';
     let password = '';
     let errorList = [];
 
@@ -16,15 +16,17 @@
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({email, password})
+            body: JSON.stringify({email: inputEmail, password})
         });
 
         if (!response.ok) {
             errorList = ['Wrong email or password.'];
         } else {
+            const json = await response.json();
             isLoggedIn.set(true);
-            const {firstName, lastName} = await response.json();
-            userName.set(firstName + ' ' + lastName);
+            userName.set(json.firstName + ' ' + json.lastName);
+            email.set(json.email);
+            pictureUrl.set(json.pictureUrl);
             goto('/');
         }
     }
@@ -52,17 +54,19 @@
     <title>Login</title>
 </svelte:head>
 
-<h1>Registration</h1>
+<h1>Login</h1>
 
 <form on:submit|preventDefault={submit}>
-    <div class="mdl-textfield mdl-js-textfield {email ? 'is-dirty': null}">
-        <input class="mdl-textfield__input" type="text" id="loginEmailInput" bind:value={email} on:focus={focus} on:blur={blur}>
+    <div class="mdl-textfield mdl-js-textfield {inputEmail ? 'is-dirty': null}">
+        <input class="mdl-textfield__input" type="text" id="loginEmailInput" bind:value={inputEmail} on:focus={focus}
+               on:blur={blur}>
         <label class="mdl-textfield__label" for="loginEmailInput">Email</label>
     </div>
 
     <div class="mdl-textfield mdl-js-textfield {password ? 'is-dirty': null}">
-        <input class="mdl-textfield__input" type="password" id="loginPasswordInput" bind:value={password} on:focus={focus} on:blur={blur}>
-        <label class="mdl-textfield__label" for="loginPasswordInput">Email</label>
+        <input class="mdl-textfield__input" type="password" id="loginPasswordInput" bind:value={password}
+               on:focus={focus} on:blur={blur}>
+        <label class="mdl-textfield__label" for="loginPasswordInput">Password</label>
     </div>
 
     {#if errorList.length > 0}

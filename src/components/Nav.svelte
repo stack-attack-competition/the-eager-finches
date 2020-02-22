@@ -9,16 +9,21 @@
     const menuToggle = () => {
         isOpen = !isOpen;
         dispatch('menutoggle', isOpen);
+    };
+
+    function logout() {
+        isLoggedIn.set(false);
     }
 </script>
 
 <style>
-	.android-header{
-		background-color: #4a4a55;
-	}
-	.android-logo-image{
-		max-width: 100px;
-	}
+    .android-header {
+        background-color: #4a4a55;
+    }
+
+    .android-logo-image {
+        max-width: 100px;
+    }
 </style>
 
 <div class="android-header mdl-layout__header mdl-layout__header--waterfall">
@@ -53,13 +58,14 @@
 				Hello, {$userName}
 			</span>
             </div>
-			<span class="android-mobile-title mdl-layout-title">
-            <img class="android-logo-image" src="svelte-logo-horizontal.svg" alt="logo">
+            <span class="android-mobile-title mdl-layout-title">
 			</span>
-			<button class="android-more-button mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect"
-                    id="more-button">
-                <i class="material-icons">person</i>
-            </button>
+            <a href="/me">
+                <button class="android-more-button mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect"
+                        id="more-button">
+                    <i class="material-icons">person</i>
+                </button>
+            </a>
             <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right mdl-js-ripple-effect" for="more-button">
                 <li class="mdl-menu__item">Profile</li>
                 <li class="mdl-menu__item">Logout</li>
@@ -71,7 +77,7 @@
                 {#if !$isLoggedIn}
                     <a class="mdl-navigation__link mdl-typography--text-uppercase"
                        href="/auth/registration"
-					   id="registerNavButton">Register</a>
+                       id="registerNavButton">Register</a>
                     <a class="mdl-navigation__link mdl-typography--text-uppercase" href="/auth/login"
                        id="loginNavButton">Login</a>
                 {/if}
@@ -85,10 +91,10 @@
           <img class="android-logo-image" src="svelte-logo-horizontal.svg" alt="logo">
         </span>
     <nav class="mdl-navigation">
-        <a class="mdl-navigation__link" href="/my-profile">User Profile</a>
+        <a class="mdl-navigation__link" href="/me">User Profile</a>
         <a class="mdl-navigation__link" href="/my-challenges">My Challenges</a>
         <a class="mdl-navigation__link" href="/my-bets">My Bets</a>
-        <a class="mdl-navigation__link" href="/logout">Logout</a>
+        <a class="mdl-navigation__link" href="#" on:click={logout}>Logout</a>
         <div class="android-drawer-separator"></div>
     </nav>
 </div>
