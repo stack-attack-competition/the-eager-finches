@@ -1,16 +1,24 @@
 <script>
 	import Nav from '../components/Nav.svelte';
 
-	export let segment;
+	let menuIsOpen = false;
 </script>
 
-<style>
+<style lang="scss">
+
+	.mdl-layout__content {
+		/*max-width: 1000px;*/
+		left: 0;
+		right: 0;
+		margin: auto;
+	}
 </style>
 
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-	<Nav {segment}/>
+	<Nav isOpen={menuIsOpen} on:menutoggle={(ev) => menuIsOpen = ev.detail}/>
 
-	<div class="android-content mdl-layout__content">
+	<div class="android-content mdl-layout__content m-t-1">
 		<slot></slot>
 	</div>
+	<div class="mdl-layout__obfuscator" class:is-visible={menuIsOpen} on:click={() => menuIsOpen = false}></div>
 </div>
