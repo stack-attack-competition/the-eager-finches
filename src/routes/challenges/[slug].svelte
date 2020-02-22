@@ -6,8 +6,6 @@
 		const res = await this.fetch(process.env.BACKEND_URL_MOCKED+`/challenges/${params.slug}`);
 		const data = await res.json();
 
-		console.log(data);
-
 		if (!res.ok) {
 			this.error(res.status, data.message);
 		}
@@ -26,7 +24,6 @@
 		if (!betsRes.ok) {
 			this.error(userRes.status, bets.message);
 		}
-
 
 		return { challenge: data, user, bets };
 	}
