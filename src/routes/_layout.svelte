@@ -15,8 +15,10 @@
 	}
 </style>
 
-<Nav {segment}/>
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+	<Nav {segment}/>
 
-<main>
-	<slot></slot>
-</main>
+	<div class="android-content mdl-layout__content">
+		<slot></slot>
+	</div>
+</div>
